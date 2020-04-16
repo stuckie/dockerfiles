@@ -11,7 +11,9 @@ RUN apt update && \
 		libsdl2-dev \
 		clang \
 		wget \
+		x11-xserver-utils \
 		ca-certificates \
+		gimp \
 		gdb
 
 RUN wget -c https://go.microsoft.com/fwlink/?LinkID=760868 -O code.deb
