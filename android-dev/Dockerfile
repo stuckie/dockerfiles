@@ -1,7 +1,5 @@
 FROM debian:buster-slim
 
-ARG USER=android
-
 RUN apt update && \
 	env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends \
 		fluxbox \
@@ -15,7 +13,8 @@ RUN apt update && \
 		x11-xserver-utils \
 		ca-certificates \
 		gimp \
-		gdb
+		gdb \
+		usbutils
 
 RUN dpkg --add-architecture i386
 RUN apt update
@@ -31,15 +30,13 @@ RUN wget -c https://go.microsoft.com/fwlink/?LinkID=760868 -O code.deb
 RUN env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends ./code.deb
 RUN rm code.deb
 
-ARG ANDROID_STUDIO_URL=https://dl.google.com/dl/android/studio/ide-zips/3.5.3.0/android-studio-ide-191.6010548-linux.tar.gz
-ARG ANDROID_STUDIO_VERSION=3.5
-
-RUN wget "$ANDROID_STUDIO_URL" -O android-studio.tar.gz
+RUN wget https://redirector.gvt1.com/edgedl/android/studio/ide-zips/3.6.2.0/android-studio-ide-192.6308749-linux.tar.gz -O android-studio.tar.gz
 RUN tar xzvf android-studio.tar.gz
 RUN rm android-studio.tar.gz
 
 RUN rm -rf /var/lib/apt/lists/*
 
+RUN mkdir -p /etc/udev/rules.d
 RUN echo 'SUBSYSTEM=="usb", ATTR{idVendor}=="04e8", ATTR{idProduct}=="6860", MODE="0660", GROUP="plugdev", SYMLINK+="android%n"' > /etc/udev/rules.d/51-android.rules
 ENV ANDROID_EMULATOR_USE_SYSTEM_LIBS=1
 
