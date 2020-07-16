@@ -18,6 +18,8 @@ RUN apt update && \
 
 RUN wget -c https://go.microsoft.com/fwlink/?LinkID=760868 -O code.deb
 RUN env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends ./code.deb
+RUN rm -rf code.deb
+
 RUN rm -rf /var/lib/apt/lists/*
 
 CMD fluxbox
