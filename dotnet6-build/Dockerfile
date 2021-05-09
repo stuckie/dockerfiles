@@ -10,8 +10,8 @@ RUN apt update && \
 		wget \
 		ca-certificates
 
-RUN wget -c https://download.visualstudio.microsoft.com/download/pr/3b62cfcf-589e-43b3-993b-517c70c93a22/0ecae846884376fecc5de8a4f6d6c927/dotnet-sdk-6.0.100-preview.1.21103.13-linux-arm.tar.gz
-RUN mkdir -p $HOME/dotnet && tar zxf dotnet-sdk-6.0.100-preview.1.21103.13-linux-arm.tar.gz -C $HOME/dotnet
+RUN wget -c https://download.visualstudio.microsoft.com/download/pr/bd2c0cea-b1b5-4de8-941b-2b53f94df021/51bdc3008f95104c1e5bf1cd7f34cf78/dotnet-sdk-6.0.100-preview.3.21202.5-linux-arm.tar.gz
+RUN mkdir -p $HOME/dotnet && tar zxf dotnet-sdk* -C $HOME/dotnet
 
 RUN     echo "#!/bin/bash" >> /do.sh && \
         echo "export DOTNET_ROOT=$HOME/dotnet" >> /do.sh && \
