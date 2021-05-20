@@ -38,6 +38,14 @@ RUN	export PATH=$PATH:/osxcross/target/bin/ && \
 	UNATTENDED=1 omp install libsdl2_image && \
 	UNATTENDED=1 omp install libsdl2_mixer
 
+RUN	git clone https://github.com/auriamg/macdylibbundler.git && \
+	cd macdylibbundler && \
+	grep -rl otool src/ | xargs sed -i 's/otool/xcrun otool/g' && \
+	grep -rl install_name_tool src/ | xargs sed -i 's/install_name_tool/xcrun install_name_tool/g' && \
+	make && make install
+
+RUN	env DEBIAN_FRONTEND=noninteractive apt install -y --no-install-recommends nano
+
 RUN	rm -rf /var/lib/apt/lists/*
 
 RUN     echo "#!/bin/bash" >> /do.sh && \
@@ -47,6 +55,8 @@ RUN     echo "#!/bin/bash" >> /do.sh && \
         echo "\$@" >> /do.sh && \
         chmod +x /do.sh && \
         cat /do.sh
+
+RUN	mkdir -p /opt/local && ln -s /osxcross/target/macports/pkgs/opt/local/lib /opt/local/lib
 
 WORKDIR	/mnt
 
