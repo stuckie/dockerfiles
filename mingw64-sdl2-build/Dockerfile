@@ -8,6 +8,7 @@ RUN apt update && \
 		mingw-w64 \
 		wget \
 		make \
+		cmake \
 		ca-certificates
 
 RUN mkdir /usr/local/x86_64-w64-mingw32 && \

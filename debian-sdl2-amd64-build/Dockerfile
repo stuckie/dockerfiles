@@ -9,6 +9,7 @@ RUN     dpkg --add-architecture amd64 && \
 		libsdl2-image-dev:amd64 \
 		libsdl2-mixer-dev:amd64 \
 		libgcc-8-dev:amd64 \
+		cmake \
 		make \
 		clang \
 		lld

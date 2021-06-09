@@ -25,14 +25,12 @@ RUN	wget -c https://github.com/emscripten-core/emsdk/archive/2.0.21.tar.gz && \
 	tar -zxvf 2.0.21.tar.gz
 
 RUN	cd emsdk* && \
-	./emsdk install node-14.15.5-32bit && \
-	./emsdk install sdk-upstream-master-32bit && \
-	./emsdk activate sdk-upstream-master-32bit && \
+	./emsdk install latest && \
+	./emsdk activate latest && \
 	. ./emsdk_env.sh
 
 RUN	echo "#!/bin/bash" >> /do.sh && \
 	echo "source /emsdk-2.0.21/emsdk_env.sh" >> /do.sh && \
-	echo "export PATH=\$PATH:/emsdk-2.0.21/node/14.15.5_32bit/bin/" >> /do.sh && \
 	echo "\$@" >> /do.sh && \
 	chmod +x /do.sh && \
 	cat /do.sh

@@ -9,6 +9,7 @@ RUN     dpkg --add-architecture armhf && \
 		libsdl2-image-dev:armhf \
 		libsdl2-mixer-dev:armhf \
 		libgcc-8-dev:armhf \
+		cmake \
 		make \
 		clang \
 		lld
